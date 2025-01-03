@@ -1,5 +1,5 @@
 {
-  "name": "astronauts",
+  "name": "astronauts-backend",
   "version": "1.0.0",
   "description": "Backend of astronauts app",
   "main": "server.js",
