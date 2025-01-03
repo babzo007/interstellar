@@ -25,7 +25,6 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createAstronaut(formData);
-    setFormData({ firstName: "", lastName: "" });
     setSuccess(true);
   };
 
