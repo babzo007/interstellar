@@ -1,7 +1,9 @@
 export function EditAstronautForm({ formEditData, handleEditChange, handleEditSubmit }) {
   return (
     <form onSubmit={handleEditSubmit}>
-      <label htmlFor="firstName">First name:</label>
+      <label className="label" htmlFor="firstName">
+        First name:
+      </label>
       <input
         type="text"
         id="firstName"
@@ -12,7 +14,9 @@ export function EditAstronautForm({ formEditData, handleEditChange, handleEditSu
       />
       <br />
 
-      <label htmlFor="lastName">Last name:</label>
+      <label className="label" htmlFor="lastName">
+        Last name:
+      </label>
       <input
         type="text"
         id="lastName"

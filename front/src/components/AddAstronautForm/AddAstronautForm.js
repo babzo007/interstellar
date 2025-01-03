@@ -1,11 +1,15 @@
-export function AddAstronaut({ handleChange, handleSubmit }) {
+export function AddAstronautForm({ handleChange, handleSubmit, formData }) {
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="firstName">First name:</label>
+      <label className="label" htmlFor="firstName">
+        First name:
+      </label>
       <input type="text" id="firstName" name="firstName" onChange={handleChange} required />
       <br />
 
-      <label htmlFor="lastName">Last name:</label>
+      <label className="label" htmlFor="lastName">
+        Last name:
+      </label>
       <input type="text" id="lastName" name="lastName" onChange={handleChange} required />
       <br />
 

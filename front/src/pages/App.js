@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { createAstronaut, editAstronaut, getAllAstronauts } from "../api/astronautsApi";
-import { AddAstronaut } from "../components/AddAstronaut/AddAstronaut";
+import { createAstronaut, deleteAstronaut, editAstronaut, getAllAstronauts } from "../api/astronautsApi";
+import { AddAstronautForm } from "../components/AddAstronautForm/AddAstronautForm";
 import { AstronautsList } from "../components/AstronautsList/AstronautsList";
 import { EditAstronautForm } from "../components/EditAstronautForm/EditAstronautForm";
 
 function App() {
   const [astronauts, setAstronauts] = useState([]);
   const [formData, setFormData] = useState({ firstName: "", lastName: "" });
-  const [formEditData, setFormEditData] = useState({ firstName: "", lastName: "" });
-
+  const [formEditData, setFormEditData] = useState(null);
   const [success, setSuccess] = useState(false);
 
   const loadAstronauts = async () => {
@@ -26,11 +25,17 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createAstronaut(formData);
+    setFormData({ firstName: "", lastName: "" });
     setSuccess(true);
   };
 
   const handleEditClick = (astronaut) => {
     setFormEditData({ ...astronaut });
+  };
+
+  const handleDelete = (astronaut) => {
+    deleteAstronaut(astronaut);
+    setSuccess(true);
   };
 
   const handleEditChange = (e) => {
@@ -41,6 +46,7 @@ function App() {
   const handleEditSubmit = (e) => {
     e.preventDefault();
     editAstronaut(formEditData);
+    setFormEditData(null);
     setSuccess(true);
   };
 
@@ -52,24 +58,26 @@ function App() {
     <div className="App">
       <h2>Add an astronaut</h2>
       <div>
-        <AddAstronaut handleSubmit={handleSubmit} handleChange={handleChange} />
+        <AddAstronautForm handleSubmit={handleSubmit} handleChange={handleChange} formData={formData} />
       </div>
-
+      <br />
       <h2>Astronauts list</h2>
       <div>
-        <AstronautsList astronauts={astronauts} handleEditClick={handleEditClick} />
+        <AstronautsList astronauts={astronauts} handleEditClick={handleEditClick} handleDelete={handleDelete} />
       </div>
 
-      <div>
-        <h2>Edit an astronaut</h2>
+      {formEditData && (
         <div>
-          <EditAstronautForm
-            formEditData={formEditData}
-            handleEditChange={handleEditChange}
-            handleEditSubmit={handleEditSubmit}
-          />
+          <h2>Edit an astronaut</h2>
+          <div>
+            <EditAstronautForm
+              formEditData={formEditData}
+              handleEditChange={handleEditChange}
+              handleEditSubmit={handleEditSubmit}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

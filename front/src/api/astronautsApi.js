@@ -27,3 +27,13 @@ export async function editAstronaut(data) {
     console.log(error);
   }
 }
+
+export async function deleteAstronaut(data) {
+  try {
+    const { id } = data;
+    const response = await axiosApi.delete(`/astronauts/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
